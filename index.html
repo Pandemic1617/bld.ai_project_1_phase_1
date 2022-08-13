@@ -6,7 +6,7 @@
         <title>Project 1 Phase 1</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-        <script src="main.js"></script>
+        <script src="main.js" defer></script>
     </head>
     <body>
         <nav class="navbar">
@@ -15,7 +15,7 @@
             <span>Categories</span>
             <!--search bar-->
             <div class="search-container">
-                <form class="form-inline">
+                <form class="form-inline" id="search-form">
                     <button class="search-button" type="submit"><img class="search-image" src="https://img.icons8.com/ios-glyphs/344/search--v1.png" /></button>
                     <input class="form-control" type="text" placeholder="Search for anything" aria-label="Search" />
                 </form>
@@ -50,7 +50,7 @@
                 >
                 <button class="courses-option-button">Explore Python</button>
                 <div class="courses-wrapper">
-                    <div class="courses">
+                    <div class="courses" id="course-view">
                         <div class="course">
                             <img src="https://img-c.udemycdn.com/course/240x135/426570_1b91_3.jpg" />
                             <span class="course-title">Learn Python: Python for Beginners</span>
