@@ -14,11 +14,11 @@ const setItems = (items) => {
         const img = document.createElement("img");
         img.src = item.img;
 
-        const title = document.createElement("span");
+        const title = document.createElement("h3");
         title.innerText = item.title;
         title.className = "course-title";
 
-        const subtitle = document.createElement("span");
+        const subtitle = document.createElement("h5");
         subtitle.innerText = item.subtitle;
         subtitle.className = "course-subtitle";
 
