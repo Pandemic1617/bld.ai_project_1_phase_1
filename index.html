@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Project 1 Phase 1</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-        <script src="main.js" defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar">
-            <img class="menu" src="https://img.icons8.com/ios-glyphs/344/menu--v1.png" />
+        <nav class="mynavbar">
+            <img class="mymenu" src="https://img.icons8.com/ios-glyphs/344/menu--v1.png" />
             <img class="logo" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="Udemy Logo" />
             <span>Categories</span>
             <!--search bar-->
@@ -35,14 +40,14 @@
             </div>
             <img src="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/easypeasy.svg" alt="couldn't find the alarm clock image :(" />
         </header>
-        <main>
+        <main class="container">
             <span class="courses-title">A broad selection of courses</span>
             <span class="courses-subtitle">Choose from 185,000 online video courses with new additions published every month</span>
-            <div class="categories">
-                <span class="selected-category">Python</span><span>Excel</span><span>Web Development</span><span>JavaScript</span><span>Data Science</span><span>AWS Certification</span
-                ><span>Drawing</span>
+            <div class="categories" id="categories">
+                <!-- <span class="selected-category">Python</span><span>Excel</span><span>Web Development</span><span>JavaScript</span><span>Data Science</span><span>AWS Certification</span
+                ><span>Drawing</span> -->
             </div>
-            <div class="category">
+            <div class="category" id="category">
                 <span class="courses-option-title">Expand your career opportunities with Python</span>
                 <span class="courses-option-subtitle"
                     >Take one of Udemy’s range of Python courses and learn how to code using this incredibly useful language. Its simple syntax and readability makes Python perfect for Flask, Django,
@@ -51,8 +56,33 @@
                 <button class="courses-option-button">Explore Python</button>
                 <div class="courses-wrapper">
                     <div class="courses" id="course-view"></div>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" id="carousel-inner">
+                          <div class="item active">
+                            <img src="https://www.w3schools.com/bootstrap/la.jpg" alt="Los Angeles" style="width:50%;">
+                          </div>
+                    
+                          <div class="item">
+                            <img src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="Chicago" style="width:50%;">
+                          </div>
+                        
+                          <div class="item">
+                            <img src="https://www.w3schools.com/bootstrap/ny.jpg" alt="New york" style="width:50%;">
+                          </div>
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                          <span class="glyphicon glyphicon-chevron-left"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                    </div>
                 </div>
             </div>
         </main>
+        <script src="main.js" defer></script>       
     </body>
 </html>
