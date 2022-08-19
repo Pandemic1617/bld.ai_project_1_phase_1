@@ -1,45 +1,49 @@
-const courses = fetch("https://mocki.io/v1/59cfdf43-964f-42a5-88a3-a41175fc53f1").then((v) => v.json());
+const env = import("./env.js");
+
+const COURSES_PER_COLLECTION = 4;
+
+const courses = env.then(({ COURSES_DATA_URL }) => fetch(COURSES_DATA_URL).then((v) => v.json()));
+
+const carouselInner = document.querySelector("#carousel-inner");
+const searchForm = document.querySelector("#search-form");
+const searchFormInput = document.querySelector("#search-form-input");
 
 let currentIndex = 0;
 
-const carouselInner = document.querySelector("#carousel-inner");
+const getSearchValue = () => searchFormInput.value;
 
-const searchForm = document.querySelector("#search-form");
-const getSearchValue = () => searchForm.childNodes[3].value;
+const courseToElement = (item) => {
+    const img = document.createElement("img");
+    img.src = item.image;
+
+    const title = document.createElement("h3");
+    title.innerText = item.title;
+    title.className = "course-title";
+
+    const subtitle = document.createElement("h5");
+    subtitle.innerText = item.author;
+    subtitle.className = "course-subtitle";
+
+    const div = document.createElement("div");
+    div.className = "course";
+    div.appendChild(img);
+    div.appendChild(title);
+    div.appendChild(subtitle);
+    return div;
+};
 
 const setItems = (items) => {
-    while (carouselInner.firstChild) {
-        carouselInner.removeChild(carouselInner.firstChild);
-    }
-    items
-        .map((item) => {
-            const img = document.createElement("img");
-            img.src = item.img;
-
-            const title = document.createElement("h3");
-            title.innerText = item.title;
-            title.className = "course-title";
-
-            const subtitle = document.createElement("h5");
-            subtitle.innerText = item.author;
-            subtitle.className = "course-subtitle";
-
-            const div = document.createElement("div");
-            div.className = "course";
-            div.appendChild(img);
-            div.appendChild(title);
-            div.appendChild(subtitle);
-            return div;
-        })
+    const newChildren = items
+        .map(courseToElement)
         .reduce(
             (prev, c) => {
-                if (prev[prev.length - 1].length < 4) prev[prev.length - 1].push(c);
+                if (prev[prev.length - 1].length < COURSES_PER_COLLECTION) prev[prev.length - 1].push(c);
                 else prev.push([c]);
                 return prev;
             },
             [[]]
         )
-        .forEach((collection, i) => {
+        .map((collection, i) => {
             const item = document.createElement("div");
             item.className = "item";
             if (i == 0) item.className += " active";
@@ -48,8 +52,10 @@ const setItems = (items) => {
 
             collection.forEach((v) => container.appendChild(v));
             item.appendChild(container);
-            carouselInner.appendChild(item);
+            return item;
         });
+
+    carouselInner.replaceChildren(...newChildren);
 };
 
 setItems([]);
@@ -61,11 +67,9 @@ const update = () => {
         const search = getSearchValue();
         setItems(course.courses.filter((item) => item.title.includes(search) || item.author.includes(search)));
 
-        const category = document.querySelector("#category");
-
-        category.children[0].textContent = course.sectionTitle;
-        category.children[1].textContent = course.courseDesc;
-        category.children[2].textContent = "Explore " + course.courseName;
+        document.querySelector("#courses-option-title").children[0].textContent = course.sectionTitle;
+        document.querySelector("#courses-option-subtitle").children[1].textContent = course.courseDesc;
+        document.querySelector("#courses-option-button").textContent = "Explore " + course.courseName;
     });
 };
 
