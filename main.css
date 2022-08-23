@@ -258,6 +258,27 @@ main {
     justify-content: center;
 }
 
+.top-categories-section {
+    margin: 50px auto;
+    max-width: 1250px;
+}
+
+.top-categories-head {
+    font-size: 40px;
+}
+
+.top-categories-category {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.top-categories-category > span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
 @media screen and (max-width: 1000px) {
     .mymenu {
         display: block;
