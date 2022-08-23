@@ -1,8 +1,8 @@
 const env = import("./env.js");
 
-const COURSES_PER_COLLECTION = 4;
-
 const courses = env.then(({ COURSES_DATA_URL }) => fetch(COURSES_DATA_URL).then((v) => v.json()));
+
+const COURSE_ITEM_WIDTH = 380;
 
 const carouselInner = document.querySelector("#carousel-inner");
 const searchForm = document.querySelector("#search-form");
@@ -11,6 +11,7 @@ const searchFormInput = document.querySelector("#search-form-input");
 let currentIndex = 0;
 
 const getSearchValue = () => searchFormInput.value;
+const getScreenWidth = () => document.body.clientWidth;
 
 const courseToElement = (item) => {
     const img = document.createElement("img");
@@ -33,11 +34,14 @@ const courseToElement = (item) => {
 };
 
 const setItems = (items) => {
+    // atleast 1 course per collection
+    const coursesPerCollection = Math.max(1, Math.floor(getScreenWidth() / COURSE_ITEM_WIDTH));
+
     const newChildren = items
         .map(courseToElement)
         .reduce(
             (prev, c) => {
-                if (prev[prev.length - 1].length < COURSES_PER_COLLECTION) prev[prev.length - 1].push(c);
+                if (prev[prev.length - 1].length < coursesPerCollection) prev[prev.length - 1].push(c);
                 else prev.push([c]);
                 return prev;
             },
@@ -67,8 +71,8 @@ const update = () => {
         const search = getSearchValue();
         setItems(course.courses.filter((item) => item.title.includes(search) || item.author.includes(search)));
 
-        document.querySelector("#courses-option-title").children[0].textContent = course.sectionTitle;
-        document.querySelector("#courses-option-subtitle").children[1].textContent = course.courseDesc;
+        document.querySelector("#courses-option-title").textContent = course.sectionTitle;
+        document.querySelector("#courses-option-subtitle").textContent = course.courseDesc;
         document.querySelector("#courses-option-button").textContent = "Explore " + course.courseName;
     });
 };
@@ -95,6 +99,8 @@ searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
     update();
 });
+
+window.addEventListener("resize", () => update());
 
 $(".carousel").carousel({
     interval: 10000,
