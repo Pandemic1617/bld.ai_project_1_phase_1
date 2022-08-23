@@ -259,7 +259,7 @@ main {
 }
 
 @media screen and (max-width: 1000px) {
-    .menu {
+    .mymenu {
         display: block;
     }
     .logo {
